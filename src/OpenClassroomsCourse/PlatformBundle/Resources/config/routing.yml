@@ -1,8 +1,10 @@
 openclassroomscourse_platform_index:
     path:     /platform
-    defaults: { _controller: OpenClassroomsCoursePlatformBundle:Advert:index }
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:index
 
 openclassroomscourse_platform_view:
     path:     /platform/adverts/{id}
-    defaults: { _controller: OpenClassroomsCoursePlatformBundle:Advert:view }
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:view
 
