@@ -2,6 +2,8 @@ openclassroomscourse_platform_index:
     path:     /
     defaults:
         _controller: OpenClassroomsCoursePlatformBundle:Advert:index
+    requirements:
+    methods:  [GET]
 
 openclassroomscourse_platform_view:
     path:     /adverts/{id}
@@ -9,6 +11,7 @@ openclassroomscourse_platform_view:
         _controller: OpenClassroomsCoursePlatformBundle:Advert:view
     requirements:
         id: \d+
+    methods:  [GET]
 
 openclassroomscourse_platform_view_slug:
     path:      /{year}/{author}.{format}
@@ -19,4 +22,5 @@ openclassroomscourse_platform_view_slug:
         year:   \d{4}
         author: \w+
         format: html|json
+    methods:  [GET]
 
