@@ -1,0 +1,33 @@
+version: "2.1"
+
+services:
+
+  phpfpm:
+    build:
+      context: ./docker/phpfpm
+    networks:
+      - openclassrooms_course
+    working_dir: /var/www/openclassrooms_course
+    volumes:
+      - ./:/var/www/openclassrooms_course
+      - ./docker/phpfpm/php.timezone.ini:/usr/local/etc/php/conf.d/timezone.ini
+
+  nginx:
+    build:
+      context: ./docker/nginx
+    networks:
+      - openclassrooms_course
+    ports:
+      - "8080:80"
+    volumes:
+      - ./docker/nginx/symfony3.conf:/etc/nginx/conf.d/symfony3.conf
+    volumes_from:
+      - phpfpm
+
+  composer:
+    build:
+      context: ./docker/composer
+
+networks:
+  openclassrooms_course:
+    driver: bridge
