@@ -1,3 +1,26 @@
-hello_my_world:
-    path:     /hello-world
-    defaults: { _controller: OpenClassroomsCoursePlatformBundle:Advert:index }
+openclassroomscourse_platform_index:
+    path:     /
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:index
+    requirements:
+    methods:  [GET]
+
+openclassroomscourse_platform_view:
+    path:     /adverts/{id}
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:view
+    requirements:
+        id: \d+
+    methods:  [GET]
+
+openclassroomscourse_platform_view_slug:
+    path:      /{year}/{author}.{format}
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:viewSlug
+        format:      html
+    requirements:
+        year:   \d{4}
+        author: \w+
+        format: html|json
+    methods:  [GET]
+
