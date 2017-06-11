@@ -1,3 +1,3 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+open_classrooms_course_platform:
+    resource: "@OpenClassroomsCoursePlatformBundle/Resources/config/routing.yml"
+    prefix:   /
