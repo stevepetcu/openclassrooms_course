@@ -13,7 +13,16 @@ class AdvertController extends Controller
     {
         $content = $this
             ->get('templating')
-            ->render('OpenClassroomsCoursePlatformBundle:Advert:index.html.twig', ['name' => 'Stefan']);
+            ->render('OpenClassroomsCoursePlatformBundle:Advert:index.html.twig');
+
+        return new Response($content);
+    }
+
+    public function viewAction($id): Response
+    {
+        $content = $this
+            ->get('templating')
+            ->render('OpenClassroomsCoursePlatformBundle:Advert:view.html.twig', compact('id'));
 
         return new Response($content);
     }
