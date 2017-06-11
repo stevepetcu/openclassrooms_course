@@ -1,3 +1,6 @@
 open_classrooms_course_platform_homepage:
     path:     /
     defaults: { _controller: OpenClassroomsCoursePlatformBundle:Default:index }
+hello_my_world:
+    path:     /hello-world
+    defaults: { _controller: OpenClassroomsCoursePlatformBundle:Hello:index }
