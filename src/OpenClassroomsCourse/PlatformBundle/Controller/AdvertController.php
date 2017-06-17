@@ -45,7 +45,6 @@ class AdvertController extends Controller
         return new Response($content);
     }
 
-
     /**
      * Returns a list of all the advertisements `$author` has created in `$year`.
      * The `$format` of the response can be either HTML, or XML.

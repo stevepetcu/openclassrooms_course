@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Advertisement with id {{ id }}</title>
-</head>
-<body>
-<h1>Showing advertisement with id: {{ id }}!</h1>
-</body>
-</html>
+{% extends "OpenClassroomsCoursePlatformBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Advertisement with id {{ id }}{% endblock %}
+
+{% block body %}
+    <h1>Showing advertisement with id: {{ id }}!</h1>
+{% endblock %}

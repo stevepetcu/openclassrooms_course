@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ author }}'s advertisements from {{ year }}</title>
-</head>
-<body>
-<h1>Showing {{ author }}'s advertisements from {{ year }}!</h1>
-</body>
-</html>
+{% extends "OpenClassroomsCoursePlatformBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ author }}'s advertisements from {{ year }}{% endblock %}
+
+{% block body %}
+    <h1>Showing {{ author }}'s advertisements from {{ year }}!</h1>
+{% endblock %}
+

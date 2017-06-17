@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome to my Symfony course!</title>
-</head>
-<body>
-<h1>Showing all advertisements!</h1>
-{% if my_values is defined %}
-    {% for index, value in my_values %}
-        <span style="{% if loop.index is even %}font-weight:bold{% endif %}">{{ index ~ '. ' ~ value }}</span>
-        {% if loop.last == false %}
-            <br>
-        {% endif %}
-    {% else %}
-        <span>No values found.</span>
-    {% endfor %}
-{% endif %}
-</body>
-</html>
+{% extends "OpenClassroomsCoursePlatformBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Home{% endblock %}
+
+{% block body %}
+    <h1>Showing all advertisements!</h1>
+    {% if my_values is defined %}
+        {% for index, value in my_values %}
+            <span style="{% if loop.index is even %}font-weight:bold{% endif %}">{{ index ~ '. ' ~ value }}</span>
+            {% if loop.last == false %}
+                <br>
+            {% endif %}
+        {% else %}
+            <span>No values found.</span>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
