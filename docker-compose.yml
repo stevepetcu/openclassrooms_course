@@ -28,6 +28,12 @@ services:
     build:
       context: ./docker/composer
 
+volumes:
+  phpfpm:
+    driver: local
+  nginx:
+    driver: local
+
 networks:
   openclassrooms_course:
     driver: bridge
