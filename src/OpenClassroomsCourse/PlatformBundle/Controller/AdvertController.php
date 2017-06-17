@@ -6,6 +6,7 @@ namespace OpenClassroomsCourse\PlatformBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdvertController extends Controller
@@ -34,7 +35,6 @@ class AdvertController extends Controller
     public function viewAction(int $id): Response
     {
         $content = $this
-            ->get('templating')
             ->render('OpenClassroomsCoursePlatformBundle:Advert:view.html.twig', compact('id'));
 
         return new Response($content);
@@ -55,7 +55,6 @@ class AdvertController extends Controller
     {
         if ('html' == $format) {
             $content = $this
-                ->get('templating')
                 ->render(
                     'OpenClassroomsCoursePlatformBundle:Advert:view_slug.html.twig',
                     compact('year', 'author')
@@ -65,5 +64,15 @@ class AdvertController extends Controller
         }
 
         return new JsonResponse(compact('year', 'author'));
+    }
+
+    /**
+     * Test the redirect method.
+     *
+     * @return RedirectResponse
+     */
+    public function redirectAction(): RedirectResponse
+    {
+        return $this->redirectToRoute('openclassroomscourse_platform_index');
     }
 }

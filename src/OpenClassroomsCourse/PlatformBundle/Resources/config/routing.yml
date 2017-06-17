@@ -24,3 +24,9 @@ openclassroomscourse_platform_view_slug:
         format: html|json
     methods:  [GET]
 
+openclassroomscourse_platform_redirect:
+    path:      /redirect
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:redirect
+    methods:  [GET]
+
