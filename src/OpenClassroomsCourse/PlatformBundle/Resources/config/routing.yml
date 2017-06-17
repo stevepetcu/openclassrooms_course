@@ -24,3 +24,28 @@ openclassroomscourse_platform_view_slug:
         format: html|json
     methods:  [GET]
 
+openclassroomscourse_platform_redirect:
+    path:      /redirect
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:redirect
+    methods:  [GET]
+
+openclassroomscourse_session_get:
+    path:      /session
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:getSession
+        format:      json
+    methods:  [GET]
+
+openclassroomscourse_session_patch:
+    path:      /session
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:patchSession
+        format:      json
+    methods:  [PATCH]
+
+openclassroomscourse_session_start:
+    path:      /session/start
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:startSession
+    methods:  [POST]
