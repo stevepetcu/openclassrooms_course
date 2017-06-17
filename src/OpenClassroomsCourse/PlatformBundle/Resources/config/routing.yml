@@ -1,5 +1,5 @@
 openclassroomscourse_platform_index:
-    path:     /
+    path:     /adverts
     defaults:
         _controller: OpenClassroomsCoursePlatformBundle:Advert:index
     requirements:
