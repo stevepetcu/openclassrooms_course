@@ -5,5 +5,15 @@
 </head>
 <body>
 <h1>Showing all advertisements!</h1>
+{% if my_values is defined %}
+    {% for index, value in my_values %}
+        <span style="{% if loop.index is even %}font-weight:bold{% endif %}">{{ index ~ '. ' ~ value }}</span>
+        {% if loop.last == false %}
+            <br>
+        {% endif %}
+    {% else %}
+        <span>No values found.</span>
+    {% endfor %}
+{% endif %}
 </body>
 </html>
