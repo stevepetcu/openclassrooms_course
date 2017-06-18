@@ -1,0 +1,20 @@
+{% extends "OpenClassroomsCoursePlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - Add an ad
+{% endblock %}
+
+{% block main_body %}
+
+    <h2>Add an ad</h2>
+
+    {{ include("OpenClassroomsCoursePlatformBundle:Advert:form.html.twig") }}
+
+    <p>
+        <a href="{{ path('openclassroomscourse_platform_index') }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Cancel
+        </a>
+    </p>
+
+{% endblock %}

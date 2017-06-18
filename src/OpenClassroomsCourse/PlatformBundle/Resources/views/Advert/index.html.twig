@@ -1,17 +1,25 @@
 {% extends "OpenClassroomsCoursePlatformBundle::layout.html.twig" %}
 
-{% block title %}{{ parent() }} - Home{% endblock %}
+{% block title %}
+    {{ parent() }} - Home
+{% endblock %}
 
 {% block body %}
-    <h1>Showing all advertisements!</h1>
-    {% if my_values is defined %}
-        {% for index, value in my_values %}
-            <span style="{% if loop.index is even %}font-weight:bold{% endif %}">{{ index ~ '. ' ~ value }}</span>
-            {% if loop.last == false %}
-                <br>
-            {% endif %}
+
+    <h2>Showing all advertisements!</h2>
+
+    <ul>
+        {% for advert in adverts %}
+            <li>
+                <a href="{{ path('openclassroomscourse_platform_view', {'id': advert.id}) }}">
+                    {{ advert.title }}
+                </a>
+                par {{ advert.author }},
+                le {{ advert.date|date('d/m/Y') }}
+            </li>
         {% else %}
-            <span>No values found.</span>
+            <li>No adverts posted (yet!)</li>
         {% endfor %}
-    {% endif %}
+    </ul>
+
 {% endblock %}

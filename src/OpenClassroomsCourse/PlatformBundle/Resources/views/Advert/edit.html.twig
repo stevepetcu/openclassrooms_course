@@ -1,0 +1,24 @@
+{% extends "OpenClassroomsCoursePlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - Edit the ad
+{% endblock %}
+
+{% block main_body %}
+
+    <h2>Edit the ad</h2>
+
+    {{ include("OpenClassroomsCoursePlatformBundle:Advert:form.html.twig") }}
+
+    <p>
+        You are editing an existing ad!
+    </p>
+
+    <p>
+        <a href="{{ path('openclassroomscourse_platform_view', {'id': advert.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Cancel
+        </a>
+    </p>
+
+{% endblock %}
