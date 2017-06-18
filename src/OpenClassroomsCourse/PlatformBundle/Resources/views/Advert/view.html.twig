@@ -1,9 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Advertisement with id {{ id }}</title>
-</head>
-<body>
-<h1>Showing advertisement with id: {{ id }}!</h1>
-</body>
-</html>
+{% extends "OpenClassroomsCoursePlatformBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - advert.title{% endblock %}
+
+{% block main_body %}
+
+    <h2>{{ advert.title }}</h2>
+    <i>By {{ advert.author }}, on {{ advert.date|date('d/m/Y') }}</i>
+
+    <div class="well">
+        {{ advert.content }}
+    </div>
+
+    <p>
+        <a href="{{ path('openclassroomscourse_platform_index') }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Back to the listing
+        </a>
+        <a href="{{ path('openclassroomscourse_platform_edit', {'id': advert.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-edit"></i>
+            Edit the ad
+        </a>
+        <a href="{{ path('openclassroomscourse_platform_delete', {'id': advert.id}) }}" class="btn btn-danger">
+            <i class="glyphicon glyphicon-trash"></i>
+            Remove the ad
+        </a>
+    </p>
+
+{% endblock %}

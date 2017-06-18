@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OpenClassroomsCourse\PlatformBundle\Controller;
 
 use Exception;
+use OpenClassroomsCourse\PlatformBundle\SpamFilter\SpamFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,6 +17,44 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class AdvertController extends Controller
 {
+    private const ADVERTS = [
+        1 => [
+            'title' => 'Recherche développpeur Symfony',
+            'id' => 1,
+            'author' => 'Alexandre',
+            'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
+            'date' => 'now'
+        ],
+        2 => [
+            'title' => 'Mission de webmaster',
+            'id' => 2,
+            'author' => 'Hugo',
+            'content' => 'Nous recherchons un webmaster capable de maintenir notre site internet. Blabla…',
+            'date' => 'now'
+        ],
+        3 => [
+            'title' => 'Offre de stage webdesigner',
+            'id' => 3,
+            'author' => 'Mathieu',
+            'content' => 'Nous proposons un poste pour webdesigner. Blabla…',
+            'date' => 'now'
+        ]
+    ];
+
+    /**
+     * Renders the left-side website menu.
+     *
+     * @param $limit
+     *
+     * @return Response
+     */
+    public function menuAction($limit)
+    {
+        $adverts = self::ADVERTS;
+
+        return $this->render('OpenClassroomsCoursePlatformBundle:Advert:menu.html.twig', compact('adverts'));
+    }
+
     /**
      * Lists all active advertisements.
      *
@@ -23,11 +62,9 @@ class AdvertController extends Controller
      */
     public function indexAction(): Response
     {
-        $content = $this
-            ->get('templating')
-            ->render('OpenClassroomsCoursePlatformBundle:Advert:index.html.twig');
+        $adverts = self::ADVERTS;
 
-        return new Response($content);
+        return $this->render('OpenClassroomsCoursePlatformBundle:Advert:index.html.twig', compact('adverts'));
     }
 
     /**
@@ -40,11 +77,61 @@ class AdvertController extends Controller
     public function viewAction(int $id): Response
     {
         $content = $this
-            ->render('OpenClassroomsCoursePlatformBundle:Advert:view.html.twig', compact('id'));
+            ->render(
+                'OpenClassroomsCoursePlatformBundle:Advert:view.html.twig',
+                [
+                    'advert' => self::ADVERTS[$id]
+                ]
+            );
 
         return new Response($content);
     }
 
+    public function addAction(Request $request): Response
+    {
+        /** @var SpamFilter $spamFilter */
+        $spamFilter = $this->get('openclassroomscourse_platform.spam_filter');
+
+        if ($spamFilter->isSpam($request->request->get('ad_content'))) {
+            throw new Exception('The ad content is too short!');
+        }
+
+        return new Response('Good job dude!');
+    }
+
+    /**
+     * Display the form to edit the advertisement identified by `$id`.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function editAction(int $id): Response
+    {
+        $content = $this
+            ->render(
+                'OpenClassroomsCoursePlatformBundle:Advert:edit.html.twig',
+                [
+                    'advert' => self::ADVERTS[$id]
+                ]
+            );
+
+        return new Response($content);
+    }
+
+    /**
+     * Deletes the advertisement identified by `$id`.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function deleteAction(int $id): Response
+    {
+        // Delete code will be here.
+
+        return new Response('Deleting ads will be implemented soon!');
+    }
 
     /**
      * Returns a list of all the advertisements `$author` has created in `$year`.

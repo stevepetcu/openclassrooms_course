@@ -1,9 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome to my Symfony course!</title>
-</head>
-<body>
-<h1>Showing all advertisements!</h1>
-</body>
-</html>
+{% extends "OpenClassroomsCoursePlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - Home
+{% endblock %}
+
+{% block body %}
+
+    <h2>Showing all advertisements!</h2>
+
+    <ul>
+        {% for advert in adverts %}
+            <li>
+                <a href="{{ path('openclassroomscourse_platform_view', {'id': advert.id}) }}">
+                    {{ advert.title }}
+                </a>
+                par {{ advert.author }},
+                le {{ advert.date|date('d/m/Y') }}
+            </li>
+        {% else %}
+            <li>No adverts posted (yet!)</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

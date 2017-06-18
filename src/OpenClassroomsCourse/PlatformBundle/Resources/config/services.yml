@@ -2,3 +2,9 @@ services:
 #    open_classrooms_course_platform.example:
 #        class: OpenClassroomsCourse\PlatformBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+services:
+    openclassroomscourse_platform.spam_filter:
+        class: OpenClassroomsCourse\PlatformBundle\SpamFilter
+        arguments:
+            - 50

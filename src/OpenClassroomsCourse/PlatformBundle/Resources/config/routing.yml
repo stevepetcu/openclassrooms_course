@@ -1,5 +1,5 @@
 openclassroomscourse_platform_index:
-    path:     /
+    path:     /adverts
     defaults:
         _controller: OpenClassroomsCoursePlatformBundle:Advert:index
     requirements:
@@ -12,6 +12,38 @@ openclassroomscourse_platform_view:
     requirements:
         id: \d+
     methods:  [GET]
+
+    openclassroomscourse_platform_patch:
+        path:     /adverts
+        defaults:
+            _controller: OpenClassroomsCoursePlatformBundle:Advert:add
+        requirements:
+            id: \d+
+        methods:  [POST]
+
+openclassroomscourse_platform_edit:
+    path:     /adverts/{id}/edit
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:edit
+    requirements:
+        id: \d+
+    methods:  [GET]
+
+openclassroomscourse_platform_patch:
+    path:     /adverts/{id}
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:patch
+    requirements:
+        id: \d+
+    methods:  [PATCH]
+
+openclassroomscourse_platform_delete:
+    path:     /adverts/{id}
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:delete
+    requirements:
+        id: \d+
+    methods:  [DELETE]
 
 openclassroomscourse_platform_view_slug:
     path:      /{year}/{author}.{format}
