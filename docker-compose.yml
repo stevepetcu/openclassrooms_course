@@ -26,6 +26,8 @@ services:
 
   mysql:
     image: mysql:8.0.1
+    networks:
+      - openclassrooms_course
     expose:
       - 3306
     ports:
@@ -38,6 +40,8 @@ services:
 
   phpmyadmin:
     image: nazarpc/phpmyadmin
+    networks:
+      - openclassrooms_course
     ports:
       - "1234:80"
     links:
