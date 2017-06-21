@@ -24,6 +24,29 @@ services:
     volumes_from:
       - phpfpm
 
+  mysql:
+    image: mysql:8.0.1
+    networks:
+      - openclassrooms_course
+    expose:
+      - 3306
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=oc_advertising
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: nazarpc/phpmyadmin
+    networks:
+      - openclassrooms_course
+    ports:
+      - "1234:80"
+    links:
+      - mysql:mysql
+
   composer:
     build:
       context: ./docker/composer
@@ -32,6 +55,8 @@ volumes:
   phpfpm:
     driver: local
   nginx:
+    driver: local
+  mysql_data:
     driver: local
 
 networks:
