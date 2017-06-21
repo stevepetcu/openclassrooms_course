@@ -1,6 +1,7 @@
 FROM php:7.1-fpm
 
-RUN useradd -ms /bin/bash symfony
+RUN docker-php-ext-install pdo_mysql \
+    && useradd -ms /bin/bash symfony
 
 USER symfony
 
