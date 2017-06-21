@@ -8,48 +8,53 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- *
- * @package OpenClassroomsCourse\PlatformBundle\Entity
+ * @ORM\Entity(repositoryClass="OpenClassroomsCourse\PlatformBundle\Repository\AdvertRepository")
  */
 class Advert
 {
     /**
+     * @var int
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="auto")
-     *
-     * @var int
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\Column(name="title", type="string", length=255)
-     *
      * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
-     * @ORM\Column(name="author", type="string", length=255)
-     *
      * @var string
+     *
+     * @ORM\Column(name="author", type="string", length=255)
      */
     private $author;
 
     /**
-     * @ORM\Column(name="content", type="text")
-     *
      * @var string
+     *
+     * @ORM\Column(name="content", type="text")
      */
     private $content;
 
     /**
-     * @ORM\Column(name="date", type="date")
-     *
      * @var DateTime
+     *
+     * @ORM\Column(name="created_at", type="date")
      */
-    private $date;
+    private $createdAt;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="updated_at", type="date")
+     */
+    private $updatedAt;
 
     /**
      * @return int
@@ -67,6 +72,7 @@ class Advert
     public function setId(int $id): Advert
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -86,6 +92,7 @@ class Advert
     public function setTitle(string $title): Advert
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -105,6 +112,7 @@ class Advert
     public function setAuthor(string $author): Advert
     {
         $this->author = $author;
+
         return $this;
     }
 
@@ -124,15 +132,16 @@ class Advert
     public function setContent(string $content): Advert
     {
         $this->content = $content;
+
         return $this;
     }
 
     /**
      * @return DateTime
      */
-    public function getDate(): DateTime
+    public function getCreatedAt(): DateTime
     {
-        return $this->date;
+        return $this->createdAt;
     }
 
     /**
@@ -140,9 +149,30 @@ class Advert
      *
      * @return Advert
      */
-    public function setDate(DateTime $date): Advert
+    public function setCreatedAt(DateTime $createdAt): Advert
     {
-        $this->date = $date;
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getUpdatedAt(): DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param DateTime $updatedAt
+     *
+     * @return Advert
+     */
+    public function setUpdatedAt(DateTime $updatedAt): Advert
+    {
+        $this->updatedAt = $updatedAt;
+
         return $this;
     }
 }
