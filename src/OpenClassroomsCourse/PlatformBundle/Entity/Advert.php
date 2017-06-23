@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="OpenClassroomsCourse\PlatformBundle\Repository\AdvertRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Advert
 {
@@ -45,14 +46,14 @@ class Advert
     /**
      * @var DateTime
      *
-     * @ORM\Column(name="created_at", type="date")
+     * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var DateTime
      *
-     * @ORM\Column(name="updated_at", type="date")
+     * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
@@ -174,5 +175,22 @@ class Advert
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setPrePersistValues()
+    {
+        $this->setCreatedAt(new DateTime());
+        $this->setUpdatedAt(new DateTime());
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function setPreUpdateValues()
+    {
+        $this->setUpdatedAt(new DateTime());
     }
 }

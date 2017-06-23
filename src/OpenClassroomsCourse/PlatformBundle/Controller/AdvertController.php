@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace OpenClassroomsCourse\PlatformBundle\Controller;
 
 use Exception;
-use OpenClassroomsCourse\PlatformBundle\SpamFilter\SpamFilter;
+use OpenClassroomsCourse\PlatformBundle\Entity\Advert;
+use OpenClassroomsCourse\PlatformBundle\Filter\SpamFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -76,31 +77,74 @@ class AdvertController extends Controller
      */
     public function viewAction(int $id): Response
     {
-        $content = $this
-            ->render(
-                'OpenClassroomsCoursePlatformBundle:Advert:view.html.twig',
-                [
-                    'advert' => self::ADVERTS[$id]
-                ]
-            );
+        $em = $this->getDoctrine()->getManager();
 
-        return new Response($content);
+        $adRepository = $em->getRepository('OpenClassroomsCoursePlatformBundle:Advert');
+
+        $ad = $adRepository->find($id);
+
+        if (null === $ad) {
+            throw new NotFoundHttpException('The requested ad was not found.');
+        }
+
+        return $this->render('OpenClassroomsCoursePlatformBundle:Advert:view.html.twig', compact('ad'));
     }
 
-    public function addAction(Request $request): Response
+    /**
+     * Displays a form for creating a new ad.
+     *
+     * @return Response
+     */
+    public function addAction(): Response
+    {
+        return $this->render(
+            'OpenClassroomsCoursePlatformBundle:Advert:add.html.twig',
+            [
+                'method' => 'POST'
+            ]
+        );
+    }
+
+    /**
+     * Creates a new advert.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @throws Exception
+     */
+    public function postAction(Request $request): Response
     {
         /** @var SpamFilter $spamFilter */
         $spamFilter = $this->get('openclassroomscourse_platform.spam_filter');
 
-        if ($spamFilter->isSpam($request->request->get('ad_content'))) {
+        if ($spamFilter->isSpam($request->request->get('content'))) {
             throw new Exception('The ad content is too short!');
         }
 
-        return new Response('Good job dude!');
+        $ad = new Advert();
+
+        $ad->setTitle($request->request->get('title'));
+        $ad->setAuthor($request->request->get('author'));
+        $ad->setContent($request->request->get('content'));
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($ad);
+        $em->flush();
+
+        $id = $ad->getId();
+
+        return $this->redirectToRoute(
+            'openclassroomscourse_platform_view',
+            compact('id', 'advert'),
+            303
+        );
     }
 
     /**
-     * Display the form to edit the advertisement identified by `$id`.
+     * Displays the form to edit the advertisement identified by `$id`.
      *
      * @param int $id
      *

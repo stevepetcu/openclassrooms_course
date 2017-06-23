@@ -1,14 +1,14 @@
 {% extends "OpenClassroomsCoursePlatformBundle::layout.html.twig" %}
 
-{% block title %}{{ parent() }} - advert.title{% endblock %}
+{% block title %}{{ parent() }} - {{ ad.title|title }}{% endblock %}
 
 {% block main_body %}
 
-    <h2>{{ advert.title }}</h2>
-    <i>By {{ advert.author }}, on {{ advert.date|date('d/m/Y') }}</i>
+    <h2>{{ ad.title|title }}</h2>
+    <i>By {{ ad.author }}, on {{ ad.createdAt|date('d/m/Y') }}; last update on {{ ad.updatedAt|date('d/m/Y') }}.</i>
 
     <div class="well">
-        {{ advert.content }}
+        {{ ad.content }}
     </div>
 
     <p>
@@ -16,11 +16,11 @@
             <i class="glyphicon glyphicon-chevron-left"></i>
             Back to the listing
         </a>
-        <a href="{{ path('openclassroomscourse_platform_edit', {'id': advert.id}) }}" class="btn btn-default">
+        <a href="{{ path('openclassroomscourse_platform_edit', {'id': ad.id}) }}" class="btn btn-default">
             <i class="glyphicon glyphicon-edit"></i>
             Edit the ad
         </a>
-        <a href="{{ path('openclassroomscourse_platform_delete', {'id': advert.id}) }}" class="btn btn-danger">
+        <a href="{{ path('openclassroomscourse_platform_delete', {'id': ad.id}) }}" class="btn btn-danger">
             <i class="glyphicon glyphicon-trash"></i>
             Remove the ad
         </a>
