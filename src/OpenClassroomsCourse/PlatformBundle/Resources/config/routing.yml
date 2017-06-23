@@ -13,14 +13,6 @@ openclassroomscourse_platform_view:
         id: \d+
     methods:  [GET]
 
-openclassroomscourse_platform_add:
-    path:     /adverts
-    defaults:
-        _controller: OpenClassroomsCoursePlatformBundle:Advert:add
-    requirements:
-        id: \d+
-    methods:  [POST]
-
 openclassroomscourse_platform_edit:
     path:     /adverts/{id}/edit
     defaults:
@@ -28,6 +20,14 @@ openclassroomscourse_platform_edit:
     requirements:
         id: \d+
     methods:  [GET]
+
+openclassroomscourse_platform_add:
+    path:     /adverts
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:add
+    requirements:
+        id: \d+
+    methods:  [POST]
 
 openclassroomscourse_platform_patch:
     path:     /adverts/{id}
