@@ -7,6 +7,7 @@ namespace OpenClassroomsCourse\PlatformBundle\Controller;
 use Exception;
 use OpenClassroomsCourse\PlatformBundle\Entity\Advert;
 use OpenClassroomsCourse\PlatformBundle\Filter\SpamFilter;
+use OpenClassroomsCourse\PlatformBundle\Repository\AdvertRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -77,15 +78,13 @@ class AdvertController extends Controller
      */
     public function viewAction(int $id): Response
     {
-        $content = $this
-            ->render(
-                'OpenClassroomsCoursePlatformBundle:Advert:view.html.twig',
-                [
-                    'advert' => self::ADVERTS[$id]
-                ]
-            );
+        $em = $this->getDoctrine()->getManager();
 
-        return new Response($content);
+        $adRepository = $em->getRepository('OpenClassroomsCoursePlatformBundle:Advert');
+
+        $ad = $adRepository->find($id);
+
+        return $this->render('OpenClassroomsCoursePlatformBundle:Advert:view.html.twig', compact('ad'));
     }
 
     /**
@@ -94,7 +93,7 @@ class AdvertController extends Controller
      * @param Request $request
      *
      * @return Response
-     * 
+     *
      * @throws Exception
      */
     public function addAction(Request $request): Response
