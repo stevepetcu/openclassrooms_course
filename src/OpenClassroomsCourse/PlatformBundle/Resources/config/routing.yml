@@ -13,7 +13,7 @@ openclassroomscourse_platform_view:
         id: \d+
     methods:  [GET]
 
-openclassroomscourse_platform_patch:
+openclassroomscourse_platform_add:
     path:     /adverts
     defaults:
         _controller: OpenClassroomsCoursePlatformBundle:Advert:add
