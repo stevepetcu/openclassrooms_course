@@ -83,6 +83,10 @@ class AdvertController extends Controller
 
         $ad = $adRepository->find($id);
 
+        if (null === $ad) {
+            throw new NotFoundHttpException('The requested ad was not found.');
+        }
+
         return $this->render('OpenClassroomsCoursePlatformBundle:Advert:view.html.twig', compact('ad'));
     }
 
