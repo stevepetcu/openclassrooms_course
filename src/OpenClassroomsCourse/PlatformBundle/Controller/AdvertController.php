@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OpenClassroomsCourse\PlatformBundle\Controller;
 
 use Exception;
+use OpenClassroomsCourse\PlatformBundle\Entity\Advert;
 use OpenClassroomsCourse\PlatformBundle\SpamFilter\SpamFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -92,9 +93,20 @@ class AdvertController extends Controller
         /** @var SpamFilter $spamFilter */
         $spamFilter = $this->get('openclassroomscourse_platform.spam_filter');
 
-        if ($spamFilter->isSpam($request->request->get('ad_content'))) {
+        if ($spamFilter->isSpam($request->request->get('content'))) {
             throw new Exception('The ad content is too short!');
         }
+
+        $ad = new Advert();
+
+        $ad->setTitle($request->request->get('title'));
+        $ad->setAuthor($request->request->get('author'));
+        $ad->setContent($request->request->get('content'));
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->persist($ad);
+        $em->flush();
 
         return new Response('Good job dude!');
     }
