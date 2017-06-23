@@ -116,7 +116,13 @@ class AdvertController extends Controller
         $em->persist($ad);
         $em->flush();
 
-        return new Response('Good job dude!');
+        $id = $ad->getId();
+
+        return $this->redirectToRoute(
+            'openclassroomscourse_platform_view',
+            compact('id', 'advert'),
+            303
+        );
     }
 
     /**
