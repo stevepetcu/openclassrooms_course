@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OpenClassroomsCourse\PlatformBundle\SpamFilter;
+namespace OpenClassroomsCourse\PlatformBundle\Filter;
 
 class SpamFilter
 {

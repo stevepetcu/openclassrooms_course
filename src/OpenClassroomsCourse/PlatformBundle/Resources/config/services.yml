@@ -5,6 +5,6 @@ services:
 
 services:
     openclassroomscourse_platform.spam_filter:
-        class: OpenClassroomsCourse\PlatformBundle\SpamFilter
+        class: OpenClassroomsCourse\PlatformBundle\Filter\SpamFilter
         arguments:
-            - 50
+            - %antispamMinContentLength%
