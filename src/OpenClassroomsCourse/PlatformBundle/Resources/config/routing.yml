@@ -25,6 +25,12 @@ openclassroomscourse_platform_add:
     path:     /adverts
     defaults:
         _controller: OpenClassroomsCoursePlatformBundle:Advert:add
+    methods:  [GET]
+
+openclassroomscourse_platform_post:
+    path:     /adverts
+    defaults:
+        _controller: OpenClassroomsCoursePlatformBundle:Advert:post
     methods:  [POST]
 
 openclassroomscourse_platform_patch:

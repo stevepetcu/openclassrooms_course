@@ -7,7 +7,6 @@ namespace OpenClassroomsCourse\PlatformBundle\Controller;
 use Exception;
 use OpenClassroomsCourse\PlatformBundle\Entity\Advert;
 use OpenClassroomsCourse\PlatformBundle\Filter\SpamFilter;
-use OpenClassroomsCourse\PlatformBundle\Repository\AdvertRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -88,7 +87,22 @@ class AdvertController extends Controller
     }
 
     /**
-     * Method to create a new advert.
+     * Displays a form for creating a new ad.
+     *
+     * @return Response
+     */
+    public function addAction(): Response
+    {
+        return $this->render(
+            'OpenClassroomsCoursePlatformBundle:Advert:add.html.twig',
+            [
+                'method' => 'POST'
+            ]
+        );
+    }
+
+    /**
+     * Creates a new advert.
      *
      * @param Request $request
      *
@@ -96,7 +110,7 @@ class AdvertController extends Controller
      *
      * @throws Exception
      */
-    public function addAction(Request $request): Response
+    public function postAction(Request $request): Response
     {
         /** @var SpamFilter $spamFilter */
         $spamFilter = $this->get('openclassroomscourse_platform.spam_filter');
@@ -126,7 +140,7 @@ class AdvertController extends Controller
     }
 
     /**
-     * Display the form to edit the advertisement identified by `$id`.
+     * Displays the form to edit the advertisement identified by `$id`.
      *
      * @param int $id
      *
