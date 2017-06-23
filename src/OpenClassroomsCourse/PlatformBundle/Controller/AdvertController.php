@@ -6,7 +6,7 @@ namespace OpenClassroomsCourse\PlatformBundle\Controller;
 
 use Exception;
 use OpenClassroomsCourse\PlatformBundle\Entity\Advert;
-use OpenClassroomsCourse\PlatformBundle\SpamFilter\SpamFilter;
+use OpenClassroomsCourse\PlatformBundle\Filter\SpamFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -88,6 +88,15 @@ class AdvertController extends Controller
         return new Response($content);
     }
 
+    /**
+     * Method to create a new advert.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     * 
+     * @throws Exception
+     */
     public function addAction(Request $request): Response
     {
         /** @var SpamFilter $spamFilter */
