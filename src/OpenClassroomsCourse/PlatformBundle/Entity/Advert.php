@@ -30,9 +30,10 @@ class Advert
     private $title;
 
     /**
-     * @var string
+     * @var Author
      *
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="OpenClassroomsCourse\PlatformBundle\Entity\Author", inversedBy="adverts", fetch="EAGER")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
 
@@ -98,15 +99,15 @@ class Advert
     }
 
     /**
-     * @return string
+     * @return Author
      */
-    public function getAuthor(): string
+    public function getAuthor(): Author
     {
         return $this->author;
     }
 
     /**
-     * @param string $author
+     * @param Author $author
      *
      * @return Advert
      */

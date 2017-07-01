@@ -9,16 +9,16 @@
     <h2>Showing all advertisements!</h2>
 
     <ul>
-        {% for advert in adverts %}
+        {% for ad in ads %}
             <li>
-                <a href="{{ path('openclassroomscourse_platform_view', {'id': advert.id}) }}">
-                    {{ advert.title }}
+                <a href="{{ path('openclassroomscourse_platform_view', {'id': ad.id}) }}">
+                    {{ ad.title }}
                 </a>
-                par {{ advert.author }},
-                le {{ advert.date|date('d/m/Y') }}
+                by {{ ad.author.firstName ~ ' ' ~ ad.author.lastName }},
+                on {{ ad.createdAt|date('d/m/Y') }}
             </li>
         {% else %}
-            <li>No adverts posted (yet!)</li>
+            <li>No ads posted (yet!)</li>
         {% endfor %}
     </ul>
 

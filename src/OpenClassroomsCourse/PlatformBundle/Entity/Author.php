@@ -51,16 +51,23 @@ class Author
     private $website;
 
     /**
+     * @var Advert
+     *
+     * @ORM\OneToMany(targetEntity="OpenClassroomsCourse\PlatformBundle\Entity\Advert", mappedBy="author")
+     */
+    private $adverts;
+
+    /**
      * @var DateTime
      *
-     * @ORM\Column(name="created_at", type="date")
+     * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var DateTime
      *
-     * @ORM\Column(name="updated_at", type="date")
+     * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
@@ -193,6 +200,25 @@ class Author
     public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return Advert
+     */
+    public function getAdverts(): Advert
+    {
+        return $this->adverts;
+    }
+
+    /**
+     * @param Advert $adverts
+     *
+     * @return Author
+     */
+    public function setAdverts(Advert $adverts): Author
+    {
+        $this->adverts = $adverts;
+        return $this;
     }
 
     /**

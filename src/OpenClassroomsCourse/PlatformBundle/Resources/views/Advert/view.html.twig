@@ -5,7 +5,7 @@
 {% block main_body %}
 
     <h2>{{ ad.title|title }}</h2>
-    <i>By {{ ad.author }}, on {{ ad.createdAt|date('d/m/Y') }}; last update on {{ ad.updatedAt|date('d/m/Y') }}.</i>
+    <i>By {{ ad.author.firstName ~ ' ' ~ ad.author.lastName }}, on {{ ad.createdAt|date('d/m/Y') }}; last update on {{ ad.updatedAt|date('d/m/Y') }}.</i>
 
     <div class="well">
         {{ ad.content }}

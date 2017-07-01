@@ -63,9 +63,13 @@ class AdvertController extends Controller
      */
     public function indexAction(): Response
     {
-        $adverts = self::ADVERTS;
+        $em = $this->getDoctrine()->getManager();
 
-        return $this->render('OpenClassroomsCoursePlatformBundle:Advert:index.html.twig', compact('adverts'));
+        $adRepository = $em->getRepository('OpenClassroomsCoursePlatformBundle:Advert');
+
+        $ads = $adRepository->findAll();
+
+        return $this->render('OpenClassroomsCoursePlatformBundle:Advert:index.html.twig', compact('ads'));
     }
 
     /**
