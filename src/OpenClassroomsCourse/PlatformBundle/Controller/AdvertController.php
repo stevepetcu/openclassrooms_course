@@ -6,6 +6,7 @@ namespace OpenClassroomsCourse\PlatformBundle\Controller;
 
 use Exception;
 use OpenClassroomsCourse\PlatformBundle\Entity\Advert;
+use OpenClassroomsCourse\PlatformBundle\Entity\Author;
 use OpenClassroomsCourse\PlatformBundle\Filter\SpamFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -127,11 +128,14 @@ class AdvertController extends Controller
             throw new Exception('The ad content is too short!');
         }
 
+        $em = $this->getDoctrine()->getManager();
+        $author = $em->getReference(Author::class, $request->request->get('author_id'));
+
         $ad = new Advert();
 
         $ad->setTitle($request->request->get('title'));
-        $ad->setAuthor($request->request->get('author'));
         $ad->setContent($request->request->get('content'));
+        $ad->setAuthor($author);
 
         $em = $this->getDoctrine()->getManager();
 

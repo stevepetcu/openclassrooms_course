@@ -111,7 +111,7 @@ class Advert
      *
      * @return Advert
      */
-    public function setAuthor(string $author): Advert
+    public function setAuthor(Author $author): Advert
     {
         $this->author = $author;
 
