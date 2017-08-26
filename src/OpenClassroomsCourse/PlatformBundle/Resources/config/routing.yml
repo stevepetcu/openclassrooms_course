@@ -22,7 +22,7 @@ openclassroomscourse_platform_edit:
     methods:  [GET]
 
 openclassroomscourse_platform_add:
-    path:     /adverts
+    path:     /adverts/add
     defaults:
         _controller: OpenClassroomsCoursePlatformBundle:Advert:add
     methods:  [GET]
