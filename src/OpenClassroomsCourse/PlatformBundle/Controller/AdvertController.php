@@ -52,9 +52,13 @@ class AdvertController extends Controller
      */
     public function menuAction($limit)
     {
-        $adverts = self::ADVERTS;
+        $em = $this->getDoctrine()->getManager();
 
-        return $this->render('OpenClassroomsCoursePlatformBundle:Advert:menu.html.twig', compact('adverts'));
+        $adRepository = $em->getRepository('OpenClassroomsCoursePlatformBundle:Advert');
+
+        $ads = $adRepository->findAll();
+
+        return $this->render('OpenClassroomsCoursePlatformBundle:Advert:menu.html.twig', compact('ads'));
     }
 
     /**

@@ -1,8 +1,8 @@
 <ul class="nav nav-pills nav-stacked">
-    {% for advert in adverts %}
+    {% for ad in ads %}
         <li>
-            <a href="{{ path('openclassroomscourse_platform_view', {'id': advert.id}) }}">
-                {{ advert.title }}
+            <a href="{{ path('openclassroomscourse_platform_view', {'id': ad.id}) }}">
+                {{ ad.title }}
             </a>
         </li>
     {% endfor %}
