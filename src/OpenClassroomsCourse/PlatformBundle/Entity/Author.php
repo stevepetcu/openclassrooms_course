@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(name="author")
  * @ORM\Entity(repositoryClass="OpenClassroomsCourse\PlatformBundle\Repository\AuthorRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Author
 {
@@ -51,16 +52,23 @@ class Author
     private $website;
 
     /**
+     * @var Advert
+     *
+     * @ORM\OneToMany(targetEntity="OpenClassroomsCourse\PlatformBundle\Entity\Advert", mappedBy="author")
+     */
+    private $adverts;
+
+    /**
      * @var DateTime
      *
-     * @ORM\Column(name="created_at", type="date")
+     * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var DateTime
      *
-     * @ORM\Column(name="updated_at", type="date")
+     * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
@@ -196,6 +204,25 @@ class Author
     }
 
     /**
+     * @return Advert
+     */
+    public function getAdverts(): Advert
+    {
+        return $this->adverts;
+    }
+
+    /**
+     * @param Advert $adverts
+     *
+     * @return Author
+     */
+    public function setAdverts(Advert $adverts): Author
+    {
+        $this->adverts = $adverts;
+        return $this;
+    }
+
+    /**
      * Set updatedAt
      *
      * @param DateTime $updatedAt
@@ -217,6 +244,24 @@ class Author
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setPrePersistValues()
+    {
+        $this
+            ->setCreatedAt(new DateTime())
+            ->setUpdatedAt($this->createdAt);
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function setPreUpdateValues()
+    {
+        $this->setUpdatedAt(new DateTime());
     }
 }
 

@@ -1,24 +1,22 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenClassroomsCourse\PlatformBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="advert")
- * @ORM\Entity(repositoryClass="OpenClassroomsCourse\PlatformBundle\Repository\AdvertRepository")
+ * @ORM\Table(name="image")
+ * @ORM\Entity(repositoryClass="OpenClassroomsCourse\PlatformBundle\Repository\ImageRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Advert
+class Image
 {
     /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -26,32 +24,30 @@ class Advert
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="alt", type="string", length=255, nullable=true)
      */
-    private $title;
-
-    /**
-     * @var Author
-     *
-     * @ORM\ManyToOne(targetEntity="OpenClassroomsCourse\PlatformBundle\Entity\Author", inversedBy="adverts", fetch="EAGER")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
-     */
-    private $author;
-
-    /**
-     * @var Image
-     *
-     * @ORM\ManyToOne(targetEntity="OpenClassroomsCourse\PlatformBundle\Entity\Image", fetch="EAGER")
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
-     */
-    private $image;
+    private $alt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
-    private $content;
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="low_resolution_url", type="string", length=500)
+     */
+    private $lowResolutionUrl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="high_resolution_url", type="string", length=500)
+     */
+    private $highResolutionUrl;
 
     /**
      * @var DateTime
@@ -78,11 +74,31 @@ class Advert
     /**
      * @param int $id
      *
-     * @return Advert
+     * @return Image
      */
-    public function setId(int $id): Advert
+    public function setId(int $id): Image
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAlt(): string
+    {
+        return $this->alt;
+    }
+
+    /**
+     * @param string $alt
+     *
+     * @return Image
+     */
+    public function setAlt(string $alt): Image
+    {
+        $this->alt = $alt;
 
         return $this;
     }
@@ -98,9 +114,9 @@ class Advert
     /**
      * @param string $title
      *
-     * @return Advert
+     * @return Image
      */
-    public function setTitle(string $title): Advert
+    public function setTitle(string $title): Image
     {
         $this->title = $title;
 
@@ -108,41 +124,21 @@ class Advert
     }
 
     /**
-     * @return Author
+     * @return string
      */
-    public function getAuthor(): Author
+    public function getLowResolutionUrl(): string
     {
-        return $this->author;
+        return $this->lowResolutionUrl;
     }
 
     /**
-     * @param Author $author
+     * @param string $lowResolutionUrl
      *
-     * @return Advert
-     */
-    public function setAuthor(Author $author): Advert
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
      * @return Image
      */
-    public function getImage(): Image
+    public function setLowResolutionUrl(string $lowResolutionUrl): Image
     {
-        return $this->image;
-    }
-
-    /**
-     * @param Image $image
-     *
-     * @return Advert
-     */
-    public function setImage(Image $image): Advert
-    {
-        $this->image = $image;
+        $this->lowResolutionUrl = $lowResolutionUrl;
 
         return $this;
     }
@@ -150,19 +146,19 @@ class Advert
     /**
      * @return string
      */
-    public function getContent(): string
+    public function getHighResolutionUrl(): string
     {
-        return $this->content;
+        return $this->highResolutionUrl;
     }
 
     /**
-     * @param string $content
+     * @param string $highResolutionUrl
      *
-     * @return Advert
+     * @return Image
      */
-    public function setContent(string $content): Advert
+    public function setHighResolutionUrl(string $highResolutionUrl): Image
     {
-        $this->content = $content;
+        $this->highResolutionUrl = $highResolutionUrl;
 
         return $this;
     }
@@ -176,11 +172,11 @@ class Advert
     }
 
     /**
-     * @param DateTime $date
+     * @param DateTime $createdAt
      *
-     * @return Advert
+     * @return Image
      */
-    public function setCreatedAt(DateTime $createdAt): Advert
+    public function setCreatedAt(DateTime $createdAt): Image
     {
         $this->createdAt = $createdAt;
 
@@ -198,9 +194,9 @@ class Advert
     /**
      * @param DateTime $updatedAt
      *
-     * @return Advert
+     * @return Image
      */
-    public function setUpdatedAt(DateTime $updatedAt): Advert
+    public function setUpdatedAt(DateTime $updatedAt): Image
     {
         $this->updatedAt = $updatedAt;
 
