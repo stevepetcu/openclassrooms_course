@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(name="author")
  * @ORM\Entity(repositoryClass="OpenClassroomsCourse\PlatformBundle\Repository\AuthorRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Author
 {
@@ -243,6 +244,24 @@ class Author
     public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setPrePersistValues()
+    {
+        $this
+            ->setCreatedAt(new DateTime())
+            ->setUpdatedAt($this->createdAt);
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function setPreUpdateValues()
+    {
+        $this->setUpdatedAt(new DateTime());
     }
 }
 

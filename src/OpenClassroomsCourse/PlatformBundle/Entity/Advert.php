@@ -8,6 +8,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="advert")
  * @ORM\Entity(repositoryClass="OpenClassroomsCourse\PlatformBundle\Repository\AdvertRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -183,8 +184,9 @@ class Advert
      */
     public function setPrePersistValues()
     {
-        $this->setCreatedAt(new DateTime());
-        $this->setUpdatedAt(new DateTime());
+        $this
+            ->setCreatedAt(new DateTime())
+            ->setUpdatedAt($this->createdAt);
     }
 
     /**
